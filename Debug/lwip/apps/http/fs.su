@@ -1,0 +1,6 @@
+fs.c:72:1:fs_malloc	16	static
+fs.c:86:1:fs_free	24	static
+fs.c:100:1:fs_open	24	static
+fs.c:141:1:fs_close	16	static
+fs.c:155:1:fs_read	32	static
+fs.c:174:5:fs_bytes_left	16	static

@@ -1,0 +1,11 @@
+core_cm4.h:1037:22:NVIC_SetPriorityGrouping	24	static
+main.c:89:5:main	16	static
+main.c:139:6:Lee_DP	24	static
+main.c:175:13:prvSetupHardware	8	static
+main.c:188:6:BlinkRED	16	static
+main.c:201:6:BlinkBLUE	16	static
+main.c:214:6:BlinkORANGE	16	static
+main.c:224:6:vApplicationTickHook	4	static
+main.c:237:6:Delay	16	static
+main.c:253:6:Time_Update	8	static
+main.c:270:6:LCD_LED_Init	8	static

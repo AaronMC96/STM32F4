@@ -1,0 +1,11 @@
+udp.c:85:1:udp_input	64	static
+udp.c:343:1:udp_send	16	static
+udp.c:367:1:udp_sendto	40	static
+udp.c:410:1:udp_sendto_if	56	static
+udp.c:586:1:udp_bind	32	static
+udp.c:686:1:udp_connect	32	static
+udp.c:744:1:udp_disconnect	16	static
+udp.c:763:1:udp_recv	24	static
+udp.c:782:1:udp_remove	24	static
+udp.c:812:1:udp_new	16	static
+udp.c:835:1:udp_debug_print	16	static

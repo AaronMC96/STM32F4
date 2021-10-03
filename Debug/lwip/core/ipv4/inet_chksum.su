@@ -1,0 +1,4 @@
+inet_chksum.c:92:1:lwip_standard_chksum	32	static
+inet_chksum.c:283:1:inet_chksum_pseudo	40	static
+inet_chksum.c:404:1:inet_chksum	16	static
+inet_chksum.c:417:1:inet_chksum_pbuf	32	static

@@ -1,0 +1,7 @@
+inet.c:61:1:inet_addr	24	static
+inet.c:83:1:inet_aton	48	static
+inet.c:183:1:inet_ntoa	40	static
+inet.c:234:1:htons	16	static
+inet.c:246:1:ntohs	16	static
+inet.c:258:1:htonl	16	static
+inet.c:273:1:ntohl	16	static

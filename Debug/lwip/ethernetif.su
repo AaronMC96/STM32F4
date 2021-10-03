@@ -1,0 +1,5 @@
+ethernetif.c:78:13:low_level_init	24	static
+ethernetif.c:140:14:low_level_output	32	static
+ethernetif.c:170:22:low_level_input	56	static
+ethernetif.c:244:7:ethernetif_input	24	static
+ethernetif.c:279:7:ethernetif_init	16	static

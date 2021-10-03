@@ -1,0 +1,8 @@
+raw.c:78:1:raw_input	48	static
+raw.c:142:1:raw_bind	16	static
+raw.c:162:1:raw_connect	16	static
+raw.c:183:1:raw_recv	24	static
+raw.c:206:1:raw_sendto	56	static
+raw.c:290:1:raw_send	16	static
+raw.c:304:1:raw_remove	24	static
+raw.c:335:1:raw_new	24	static

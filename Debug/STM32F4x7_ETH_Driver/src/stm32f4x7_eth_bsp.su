@@ -1,0 +1,8 @@
+core_cm4.h:1156:22:NVIC_SetPriority	16	static
+core_cm4.h:1281:26:SysTick_Config	16	static
+stm32f4x7_eth_bsp.c:46:6:ETH_BSP_Config	24	static
+stm32f4x7_eth_bsp.c:85:13:ETH_MACDMA_Config	200	static
+stm32f4x7_eth_bsp.c:152:6:ETH_GPIO_Config	16	static
+stm32f4x7_eth_bsp.c:265:10:Eth_Link_PHYITConfig	24	static
+stm32f4x7_eth_bsp.c:299:6:Eth_Link_EXTIConfig	32	static
+stm32f4x7_eth_bsp.c:339:6:Eth_Link_ITHandler	16	static

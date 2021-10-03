@@ -1,0 +1,13 @@
+pbuf.c:182:1:pbuf_alloc	40	static
+pbuf.c:343:1:pbuf_realloc	32	static
+pbuf.c:424:1:pbuf_header	24	static
+pbuf.c:531:1:pbuf_free	32	static
+pbuf.c:607:1:pbuf_clen	24	static
+pbuf.c:626:1:pbuf_ref	16	static
+pbuf.c:648:1:pbuf_cat	24	static
+pbuf.c:689:1:pbuf_chain	16	static
+pbuf.c:706:1:pbuf_dechain	24	static
+pbuf.c:755:1:pbuf_copy	24	static
+pbuf.c:821:1:pbuf_copy_partial	40	static
+pbuf.c:869:1:pbuf_take	40	static
+pbuf.c:913:1:pbuf_coalesce	24	static

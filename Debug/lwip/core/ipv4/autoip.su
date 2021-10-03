@@ -1,0 +1,12 @@
+autoip.c:129:1:autoip_init	4	static
+autoip.c:138:1:autoip_handle_arp_conflict	24	static
+autoip.c:174:1:autoip_create_addr	24	static
+autoip.c:206:1:autoip_arp_probe	32	static
+autoip.c:219:1:autoip_arp_announce	40	static
+autoip.c:232:1:autoip_bind	32	static
+autoip.c:260:1:autoip_start	24	static
+autoip.c:309:1:autoip_start_probing	24	static
+autoip.c:339:1:autoip_network_changed	16	static
+autoip.c:353:1:autoip_stop	16	static
+autoip.c:364:1:autoip_tmr	16	static
+autoip.c:442:1:autoip_arp_reply	32	static

@@ -1,0 +1,2 @@
+init.c:204:1:lwip_sanity_check	4	static
+init.c:234:1:lwip_init	8	static

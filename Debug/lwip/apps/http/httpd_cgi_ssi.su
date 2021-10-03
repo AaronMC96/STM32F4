@@ -1,0 +1,5 @@
+httpd_cgi_ssi.c:57:13:ADC_Configuration	56	static
+httpd_cgi_ssi.c:102:7:ADC_Handler	40	static
+httpd_cgi_ssi.c:154:14:LEDS_CGI_Handler	32	static
+httpd_cgi_ssi.c:198:6:httpd_ssi_init	8	static
+httpd_cgi_ssi.c:207:6:httpd_cgi_init	8	static
