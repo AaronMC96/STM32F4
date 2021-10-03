@@ -26,6 +26,9 @@
 #include "lwip/tcp.h"
 #include <string.h>
 #include <stdio.h>
+#include "stm32f4_discovery.h"
+#include <stm32f4xx_adc.h>
+#include "adc.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -35,6 +38,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 struct udp_pcb *client_upcb;
+float tension;
 
 /* Private function prototypes -----------------------------------------------*/
 void udp_echoserver_receive_callback(void *arg, struct udp_pcb *upcb, struct pbuf *p, struct ip_addr *addr, u16_t port);
@@ -91,20 +95,40 @@ void udp_echoserver_receive_callback(void *arg, struct udp_pcb *upcb, struct pbu
 
 	rsp = pbuf_alloc(PBUF_TRANSPORT,80,PBUF_POOL);
 
-	sprintf(rsp->payload,"%u.%u.%u.%u : %u msg: %s",addr->addr&255,(addr->addr>>8)&255,(addr->addr>>16)&255,(addr->addr>>24)&255,port,(char *)p->payload);
+	if (strcmp (p->payload, "LED1,ON")==0)
+	{
+		STM_EVAL_LEDOn(LED5);
+		sprintf(rsp->payload,"LED1,ON");
+	}
 
-  /* Connect to the remote client */
-  udp_connect(upcb, addr, port); //UDP_CLIENT_PORT);
+	if (strcmp (p->payload, "LED1,OFF")==0)
+	{
+		STM_EVAL_LEDOff(LED5);
+		sprintf(rsp->payload,"LED1,OFF");
+	}
+	if (strcmp (p->payload, "VIN,V")==0)
+	{
+		tension=adc2_leer_cuentas()*2.93/4095;
+		sprintf(rsp->payload,"VIN:%1.2f V",tension);
+	}
+	if (strcmp (p->payload, "VIN,mV")==0)
+	{
+		tension=(adc2_leer_cuentas()*2.93/4095)*1000;
+		sprintf(rsp->payload,"VIN:%.2f mV",tension);
+	}
 
-  /* Tell the client that we have accepted it */
-  udp_send(upcb, rsp);
+	/* Connect to the remote client */
+	udp_connect(upcb, addr, 8000); // Establece una coneccion con el servidor
 
-  /* free the UDP connection, so we can accept new clients */
-  udp_disconnect(upcb);
-	
-  /* Free the p buffer */
-  pbuf_free(p);
-  pbuf_free(rsp);
+	/* Tell the client that we have accepted it */
+	udp_send(upcb, rsp);// envia el contenido de la cadena rsp, al servidor (puerto 8000)
+
+	/* free the UDP connection, so we can accept new clients */
+	udp_disconnect(upcb);
+
+	/* Free the p buffer */
+	pbuf_free(p);
+	pbuf_free(rsp);
 }
 
 /**

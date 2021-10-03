@@ -1,9 +1,9 @@
 /**
  ******************************************************************************
  * @file    main.c
- * @author  MCD Application Team
+ * @author  Ejercicio Practico de Laboratorio
  * @version V1.0.0
- * @date    31-October-2011
+ * @date    1-October-2020
  * @brief   Main program body
  ******************************************************************************
  * @attention
@@ -18,7 +18,26 @@
  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
  ******************************************************************************
  */
-//PROBANDO
+
+/**
+  ******************************************************************************
+  * @file    main.c
+  * @title	 Ejercicio 1 - Practica de Problemas N°3.
+  * @author  Apaza Adolfo.
+  * @date    1-Junio-2020
+  * @brief   Este programa implementa el manejo del ADC2 con detección de fin
+  * de conversión por polling.
+  * Permite que el usuario inyecte un nivel de tensión analogico de entre 0 y
+  * 3V en el pin PC2(ADC2).
+  * El valor adquirido de la señal del Pin PC2 es mostrado en la segunda linea del display 16x02,
+  * como valor de tension, y el valor cuentas obtenidas es mostrado en la primer linea.
+  *
+  * Por detalles de funcionamiento ver:
+  * - STM32f407 - DM00037051.pdf
+  * - Manual de referencia STM32F4XXXX - ARM 32 bits - DM00031020.pdf
+  ******************************************************************************
+  */
+
 /* Includes ------------------------------------------------------------------*/
 #include <serial_debug.h>
 #include "stm32f4x7_eth.h"
@@ -26,8 +45,8 @@
 #include "main.h"
 #include "httpd.h"
 #include <stdint.h>
-
 #include "udp_echoserver.h"
+
 
 /* Kernel includes. */
 //#include "stm32f4xx.h"
@@ -36,13 +55,15 @@
 #include "../FreeRTOS/include/semphr.h"
 #include "../FreeRTOS/include/task.h"
 #include "../FreeRTOS/include/timers.h"
+#include <stm32f4xx_adc.h>
+#include "adc.h"
 
 //--------------------------------------------------------------
 //Define los delay de las tareas a ejecutar, en ms
 //--------------------------------------------------------------
 #define DelayRED		1000
 #define DelayBLUE		500
-#define DelayORANGE	200
+#define DelayORANGE		200
 #define DelayDP			10
 //--------------------------------------------------------------
 
@@ -98,6 +119,8 @@ int main(void)
 
 	RCC_GetClocksFreq(&RCC_Clocks);
 
+	adc_inicializar();
+
 #ifdef SERIAL_DEBUG
 	DebugComPort_Init();
 	printf("STM32DISCOVERY is booting...\r\n");
@@ -123,9 +146,9 @@ int main(void)
     udp_client_init();
 
   //--------------------------- Creacion de las tareas del FreeRTOS ---------------------------
-	xTaskCreate(BlinkRED, (char *) "BlinkyRED", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-	xTaskCreate(BlinkBLUE, (char *) "BlinkyBLUE", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-	xTaskCreate(BlinkORANGE, (char *) "BlinkyORANGE", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+	//xTaskCreate(BlinkRED, (char *) "BlinkyRED", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+//	xTaskCreate(BlinkBLUE, (char *) "BlinkyBLUE", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
+//	xTaskCreate(BlinkORANGE, (char *) "BlinkyORANGE", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 	xTaskCreate(Lee_DP, (char *) "Lee_DP", 2 * configMINIMAL_STACK_SIZE, NULL, 1, NULL);
 
 //    //Inicia FreeRTOS
@@ -141,6 +164,12 @@ void Lee_DP(void *pvParameters)
 	uint8_t rx=0, but=0;
 	struct ip_addr dest_addr;
 
+/*
+	if (strcmp (p->callback, "COLOR")==0)
+	{
+
+	}
+*/
 	while (1)
 	{
 		/* check if any packet received */
@@ -155,14 +184,17 @@ void Lee_DP(void *pvParameters)
 		if(!rx)
 		{
 			vTaskDelay(DelayDP/portTICK_RATE_MS);		//Delay de 10mseg
+		//	udp_sendto(,p,&dest_addr,8000);
 		}
+
+
 
 		if( STM_EVAL_PBGetState(BUTTON_USER) == 1 )
 		{
 			if(but==0)
 			{
 				but = 1;
-				dest_addr.addr = IPV4_ADDR(192,168,1,109);		//Dirección IP de mi PC para pruebas del Ciente UDP
+				dest_addr.addr = IPV4_ADDR(192,168,0,101);		//Dirección IP de mi PC para pruebas del Ciente UDP
 
 				udp_client(&dest_addr, 8000,"HELLO WORLD!");
 			}
@@ -185,15 +217,15 @@ static void prvSetupHardware(void)
 //--------------------------------------------------------------
 // FreeRTOS-Task "BlinkRED"
 //--------------------------------------------------------------
-void BlinkRED(void *pvParameters)
-{
-	while (1)
-	{
-		STM_EVAL_LEDToggle(LED5);						//Togglea led Rojo
-
-		vTaskDelay(DelayRED / portTICK_RATE_MS);		//Delay de 1seg
-	}
-}
+//void BlinkRED(void *pvParameters)
+//{
+//	while (1)
+//	{
+//		STM_EVAL_LEDToggle(LED5);						//Togglea led Rojo
+//
+//		vTaskDelay(DelayRED / portTICK_RATE_MS);		//Delay de 1seg
+//	}
+//}
 
 //--------------------------------------------------------------
 // FreeRTOS-Task "BlinkBLUE"
